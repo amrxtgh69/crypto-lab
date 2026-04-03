@@ -29,14 +29,14 @@ We need a way to measure surprise mathematically.
 
 A function that behaves like this is:
 
-$$	ext{surprise} = -\log(p)$$
+$$\text{surprise} = -\log(p)$$
 
 In cryptography, **high entropy** means a key or plaintext is hard to guess. For a truly random n-bit key, $H = n$ bits.
 
 We say:
 - "truly random n-bit key"
 - This means: Every key is equally likely
-- So: $p_i = rac{1}{2^n}$ for all $i$
+- So: $p_i = \frac{1}{2^n}$ for all $i$
 
 ### Mathematical Derivation
 
@@ -46,19 +46,19 @@ For a truly random n-bit key:
    $$H = -\sum_{i=1}^{2^n} p_i \log_2(p_i)$$
 
 2. **Substitute $p_i$**:
-   $$H = -\sum_{i=1}^{2^n} rac{1}{2^n} \log_2\left(rac{1}{2^n}ight)$$
+   $$H = -\sum_{i=1}^{2^n} \frac{1}{2^n} \log_2\left(\frac{1}{2^n}\right)$$
 
 3. **Simplify the Logarithm**:
-   $$\log_2\left(rac{1}{2^n}ight) = -n$$
+   $$\log_2\left(\frac{1}{2^n}\right) = -n$$
 
 4. **Substitute Back**:
-   $$H = -\sum_{i=1}^{2^n} rac{1}{2^n} \cdot (-n)$$
+   $$H = -\sum_{i=1}^{2^n} \frac{1}{2^n} \cdot (-n)$$
 
 5. **Factor Out Constants**:
-   $$H = -\left( (-n) \cdot \sum_{i=1}^{2^n} rac{1}{2^n} ight)$$
+   $$H = -\left( (-n) \cdot \sum_{i=1}^{2^n} \frac{1}{2^n} \right)$$
 
 6. **Evaluate the Sum**:
-   $$\sum_{i=1}^{2^n} rac{1}{2^n} = 1$$
+   $$\sum_{i=1}^{2^n} \frac{1}{2^n} = 1$$
 
 7. **Final Result**:
    $$H = -(-n \cdot 1) = n$$
@@ -78,7 +78,7 @@ For a truly random n-bit key:
 - **Plaintext (P)**: The secret message
 - **Key (K)**: Secret randomness
 - **Ciphertext (C)**: What the attacker sees
-- **Encryption**: $C = 	ext{Enc}(P, K)$
+- **Encryption**: $C = \text{Enc}(P, K)$
 
 ### Demand of Perfect Secrecy
 
