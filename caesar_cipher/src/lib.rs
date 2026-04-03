@@ -16,6 +16,20 @@ pub fn encrypt(plaintext: &str, shift: u8) -> String {
 }
 
 pub fn decrypt(ciphertext: &str, shift: u8) -> String {
-
+    encrypt(ciphertext, 26 - (shift % 26))
 }
 
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_encrypt_decrypt() {
+        let plaintext = "Hello Caesar";
+        let shift = 3;
+        let ciphertext = encrypt(plaintext, shift);
+        let decrypted = decrypt(&ciphertext, shift);
+        assert_eq!(decrypted, plaintext);
+    }
+}
