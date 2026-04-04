@@ -1,3 +1,5 @@
+pub mod frequency_analysis;
+
 pub fn encrypt(plaintext: &str, shift: u8) -> String {
     plaintext
         .chars()
