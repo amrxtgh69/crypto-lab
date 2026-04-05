@@ -18,10 +18,9 @@
  * so the main attack is find key length:
  * split into group and break each group using frequency analysis
  * combine shift -> get key
- * 
- * here i am implementing just caesar cipher attack brute force: 
+ *
+ * here i am implementing just caesar cipher attack brute force:
  */
-
 
 //  `ciphertext
 //    ↓
@@ -39,11 +38,8 @@ use std::usize;
 
 // The frequency of letters in English text.
 const ENGLISH_FREQ: [f64; 26] = [
-    8.15, 1.44, 2.76, 3.79, 13.11, 2.92, 1.99,
-    5.26, 6.35, 0.13, 0.42, 3.39, 2.54,
-    7.10, 8.00, 1.98, 0.12, 6.83,
-    6.10, 10.47, 2.46, 0.92, 1.54,
-    0.17, 1.98, 0.08
+    8.15, 1.44, 2.76, 3.79, 13.11, 2.92, 1.99, 5.26, 6.35, 0.13, 0.42, 3.39, 2.54, 7.10, 8.00,
+    1.98, 0.12, 6.83, 6.10, 10.47, 2.46, 0.92, 1.54, 0.17, 1.98, 0.08,
 ];
 
 pub fn break_caesar(ciphertext: &str) -> (u8, String) {
@@ -51,7 +47,6 @@ pub fn break_caesar(ciphertext: &str) -> (u8, String) {
     let plaintext = decrypt(ciphertext, shift);
     (shift, plaintext)
 }
-
 
 fn find_shift(ciphertext: &str) -> u8 {
     let mut best_shift = 0;
@@ -78,13 +73,14 @@ fn normalize(counts: &[u32; 26]) -> [f64; 26] {
     let mut freq = [0.0; 26];
 
     for i in 0..26 {
-        let freq[i]: f64 = counts[i] as f64 * 100.0 / total as f64;
+        freq[i] = counts[i] as f64 * 100.0 / total as f64;
     }
     freq
 }
+
 fn score(freq: &[f64; 26]) -> f64 {
     let mut s = 0.0;
-    
+
     for i in 0..26 {
         let diff = freq[i] - ENGLISH_FREQ[i];
         s += diff * diff;
