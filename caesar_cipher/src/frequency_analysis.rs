@@ -83,6 +83,13 @@ fn normalize(counts: &[u32; 26]) -> [f64; 26] {
     freq
 }
 fn score(freq: &[f64; 26]) -> f64 {
+    let mut s = 0.0;
+    
+    for i in 0..26 {
+        let diff = freq[i] - ENGLISH_FREQ[i];
+        s += diff * diff;
+    }
+    s
 }
 fn count_letters(text: &str) -> [u32; 26] {
     let mut counts = [0; 26];
@@ -94,8 +101,3 @@ fn count_letters(text: &str) -> [u32; 26] {
     }
     counts
 }
-
-fn most_frequent_letter(counts: &str) -> u8 {
-    todo!()
-}
-
