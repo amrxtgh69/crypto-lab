@@ -34,13 +34,13 @@
 
 use crate::decrypt;
 use core::f64;
-use std::usize;
 
 // The frequency of letters in English text.
 const ENGLISH_FREQ: [f64; 26] = [
     8.15, 1.44, 2.76, 3.79, 13.11, 2.92, 1.99, 5.26, 6.35, 0.13, 0.42, 3.39, 2.54, 7.10, 8.00,
     1.98, 0.12, 6.83, 6.10, 10.47, 2.46, 0.92, 1.54, 0.17, 1.98, 0.08,
 ];
+const ALPHABET_SIZE: u8 = 26;
 
 pub fn break_caesar(ciphertext: &str) -> (u8, String) {
     let shift = find_shift(ciphertext);
@@ -52,7 +52,7 @@ fn find_shift(ciphertext: &str) -> u8 {
     let mut best_shift = 0;
     let mut best_score = f64::INFINITY;
 
-    for shift in 0..26 {
+    for shift in 0..ALPHABET_SIZE {
         let decrypted = decrypt(ciphertext, shift);
 
         let counts = count_letters(&decrypted);
@@ -79,14 +79,15 @@ fn normalize(counts: &[u32; 26]) -> [f64; 26] {
 }
 
 fn score(freq: &[f64; 26]) -> f64 {
-    let mut s = 0.0;
-
-    for i in 0..26 {
-        let diff = freq[i] - ENGLISH_FREQ[i];
-        s += diff * diff;
-    }
-    s
+    freq.iter()
+        .zip(ENGLISH_FREQ.iter())
+        .map(|(f, e)| {
+            let diff = f - e;
+            diff * diff
+        })
+    .sum()
 }
+
 fn count_letters(text: &str) -> [u32; 26] {
     let mut counts = [0; 26];
     for c in text.chars() {
