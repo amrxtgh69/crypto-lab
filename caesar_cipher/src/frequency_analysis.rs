@@ -74,10 +74,15 @@ fn find_shift(ciphertext: &str) -> u8 {
 }
 
 fn normalize(counts: &[u32; 26]) -> [f64; 26] {
-    todo!();
+    let total: u32 = counts.iter().sum();
+    let mut freq = [0.0; 26];
+
+    for i in 0..26 {
+        let freq[i]: f64 = counts[i] as f64 * 100.0 / total as f64;
+    }
+    freq
 }
 fn score(freq: &[f64; 26]) -> f64 {
-    todo!();
 }
 fn count_letters(text: &str) -> [u32; 26] {
     let mut counts = [0; 26];
