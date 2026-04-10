@@ -6,7 +6,7 @@ fn main() {
     So startling would his results appear to the uninitiated that until they learned the \
     processes by which he had arrived at them they might well consider him as a necromancer";
 
-    let shift = 18;
+    let shift = 17;
     
     let ciphertext = encrypt(plaintext, shift);
     
